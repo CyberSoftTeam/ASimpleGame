@@ -118,7 +118,7 @@ public class DBService {
 	 */
 	public class DatabaseHelper extends SQLiteOpenHelper {
 
-		// initialize at November 26, 2014 (version 1)
+		// initialize at February 3, 2015 (version 1)
 		private static final int DB_VERSION = 1;
 
 		private SQLiteDatabase mDatabase;

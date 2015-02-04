@@ -1,9 +1,16 @@
 <resources>
 
-    <string name="app_name">DemoGame</string>
+    <string name="app_name">Demo Game</string>
     
     <string name="begin_screen">Begin</string>
     <string name="main_screen">Demo Game</string>
     <string name="end_screen">Game Over</string>
 
+    <string name="btn_start_game">Start Game</string>
+    <string name="btn_stop_game">Stop Game</string>
+    <string name="btn_restart_game">Restart Game</string>
+    <string name="game_statistic_desc">User\'s Score</string>
+    <string name="game_statistic_content">Score: %d</string>
+    <string name="end_screen_content">Game Over\nFinal Score: %d</string>
+    
 </resources>

@@ -26,6 +26,8 @@ public class Preferences extends Application {
 	public static final String APPLICATION_PATH =
 			Environment.getExternalStorageDirectory() + File.separator +
 			"DemoGame";
+	public static final String IMAGE_DIR_PATH = APPLICATION_PATH +
+			File.separator + "img";
 
 	// Preferences Constants
 	private final String PREFERENCES_NAME = "preferences";

@@ -1,8 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/vn.cybersoft.demo.simplegame"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
-    
+    android:background="@color/game_background"
+    android:padding="10dp" >
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/txt_finalscore"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/text_border"
+        android:gravity="center"
+        android:paddingBottom="10dp"
+        android:text="@string/end_screen"
+        android:textColor="@android:color/white"
+        android:textSize="25sp" />
+
+    <vn.cybersoft.simplegame.widgets.FButton
+        android:id="@+id/btn_restart_game"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txt_finalscore"
+        android:layout_centerInParent="true"
+        android:minHeight="@dimen/demo_button_min_height"
+        android:minWidth="@dimen/demo_button_min_width"
+        android:text="@string/btn_restart_game"
+        android:textColor="@android:color/white"
+        android:textSize="25sp"
+        app:buttonColor="@color/fbutton_color_emerald"
+        app:shadowEnabled="true" />
+
+</RelativeLayout>
