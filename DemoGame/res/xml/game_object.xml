@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<game-objects>
+	<primary-char>
+	    <name>Player</name>
+	    <init-point>0</init-point>
+	</primary-char>  
+	
+	<secondary-char>
+	    <name>Seed</name>
+	    <image>seed.png</image>
+	    <point>5</point>
+	</secondary-char>   
+	<secondary-char>
+	    <name>Sprout</name>
+	    <image>sprout.png</image>
+	    <point>10</point>
+	</secondary-char>   
+	<secondary-char>
+	    <name>Rose</name>
+	    <image>rose.png</image>
+	    <point>15</point>
+	</secondary-char> 
+	
+	<tool>
+	    <name>Shovel</name>
+	    <image>shovel.png</image>
+	    <cost>5</cost>
+	</tool>
+	<tool>
+	    <name>Watering-Can</name>
+	    <image>watering.png</image>
+	    <cost>5</cost>
+	</tool>
+	<tool>
+	    <name>Scissor</name>
+	    <image>scissor.png</image>
+	    <cost>5</cost>
+	</tool>
+	
+</game-objects>

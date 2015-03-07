@@ -1,7 +1,7 @@
-package vn.cybersoft.simplegame.gui;
+package vn.cybersoft.simplegame.controller;
 
 import vn.cybersoft.demo.simplegame.R;
-import vn.cybersoft.simplegame.widgets.FButton;
+import vn.cybersoft.simplegame.view.FButton;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;

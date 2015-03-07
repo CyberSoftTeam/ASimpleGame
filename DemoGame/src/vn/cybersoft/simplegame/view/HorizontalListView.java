@@ -24,7 +24,7 @@
  * It has been substantially rewritten and added to from the original version.
  */
 // @formatter:on
-package vn.cybersoft.simplegame.widgets;
+package vn.cybersoft.simplegame.view;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

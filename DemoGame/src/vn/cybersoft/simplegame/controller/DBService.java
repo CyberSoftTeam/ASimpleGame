@@ -1,4 +1,4 @@
-package vn.cybersoft.simplegame.services;
+package vn.cybersoft.simplegame.controller;
 
 import java.io.File;
 import java.io.IOException;

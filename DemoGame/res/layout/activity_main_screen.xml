@@ -6,7 +6,7 @@
     android:background="@color/game_background"
     android:padding="10dp" >
 
-    <vn.cybersoft.simplegame.widgets.HorizontalListView
+    <vn.cybersoft.simplegame.view.HorizontalListView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:widget="http://schemas.android.com/apk/res-auto"
         android:id="@+id/list_tools"
@@ -16,7 +16,7 @@
         android:scrollbarSize="3dp"
         widget:dividerWidth="2dp" />
 
-    <vn.cybersoft.simplegame.widgets.FButton
+    <vn.cybersoft.simplegame.view.FButton
         android:id="@+id/btn_stop_game"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

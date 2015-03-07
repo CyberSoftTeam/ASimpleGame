@@ -1,4 +1,4 @@
-package vn.cybersoft.simplegame.widgets;
+package vn.cybersoft.simplegame.view;
 
 import vn.cybersoft.demo.simplegame.R;
 import android.content.Context;

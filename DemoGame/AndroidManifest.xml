@@ -17,7 +17,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="vn.cybersoft.simplegame.gui.BeginActivity"
+            android:name="vn.cybersoft.simplegame.controller.BeginActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
             <intent-filter>
@@ -27,11 +27,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="vn.cybersoft.simplegame.gui.MainActivity"
+            android:name="vn.cybersoft.simplegame.controller.MainActivity"
             android:label="@string/main_screen"
             android:screenOrientation="portrait" />
         <activity
-            android:name="vn.cybersoft.simplegame.gui.EndActivity"
+            android:name="vn.cybersoft.simplegame.controller.EndActivity"
             android:label="@string/end_screen"
             android:screenOrientation="portrait" />
     </application>

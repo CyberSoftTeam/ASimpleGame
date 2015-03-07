@@ -1,4 +1,4 @@
-package vn.cybersoft.simplegame.gui;
+package vn.cybersoft.simplegame.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,10 +6,11 @@ import java.util.List;
 import vn.cybersoft.demo.simplegame.R;
 import vn.cybersoft.simplegame.Preferences;
 import vn.cybersoft.simplegame.model.PrimaryCharacter;
+import vn.cybersoft.simplegame.model.RuleExecutor;
 import vn.cybersoft.simplegame.model.SecondaryCharacter;
 import vn.cybersoft.simplegame.model.Tool;
-import vn.cybersoft.simplegame.widgets.FButton;
-import vn.cybersoft.simplegame.widgets.HorizontalListView;
+import vn.cybersoft.simplegame.view.FButton;
+import vn.cybersoft.simplegame.view.HorizontalListView;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -68,32 +69,13 @@ implements OnClickListener {
 			Log.d(TAG, "You are choosing "+item.getName()+"-"+item.getDescription());
 			
 			Tool tool = toolAdapter.getCurrentTool();
-			if (tool.getName().equals("Shovel")
-					&& item.getName().startsWith("Seed")) {
-				SecondaryCharacter newItem =
-						new SecondaryCharacter("Sprout "+position, "Sprout");
-				Bitmap itemImg = BitmapFactory.decodeFile(Preferences.IMAGE_DIR_PATH+"/sprout.png");
-				newItem.setImage(itemImg);
-				newItem.setCumulativeScore(10);
+			SecondaryCharacter newItem = RuleExecutor.doRule(tool,
+					item, position, user);
+			if (newItem!=null) {
 				charAdapter.replaceItem(position, newItem);
-			} else if (tool.getName().equals("Watering-Can")
-					&& item.getName().startsWith("Sprout")) {
-				SecondaryCharacter newItem =
-						new SecondaryCharacter("Rose "+position, "Rose");
-				Bitmap itemImg = BitmapFactory.decodeFile(Preferences.IMAGE_DIR_PATH+"/rose.png");
-				newItem.setCumulativeScore(30);
-				newItem.setImage(itemImg);
-				charAdapter.replaceItem(position, newItem);
-			} else if (tool.getName().equals("Scissor")
-					&& item.getName().startsWith("Rose")) {
-				updateUserScore(item.getCumulativeScore());
-				
-				SecondaryCharacter newItem =
-						new SecondaryCharacter("Seed "+position, "Seed");
-				Bitmap itemImg = BitmapFactory.decodeFile(Preferences.IMAGE_DIR_PATH+"/seed.png");
-				newItem.setImage(itemImg);
-				charAdapter.replaceItem(position, newItem);
-			}   
+				updateUserScore();
+			}
+			
 		}
 
 	};
@@ -148,11 +130,19 @@ implements OnClickListener {
 		context.startActivity(i);
 	}
 
+	@SuppressWarnings("unused")
 	private void updateUserScore(long cumulativeScore) {
 		user.setScore(user.getScore()+cumulativeScore);
 		txtStatistic.setText(getString(R.string.game_statistic_content, user.getScore()));
 	}
+
+	private void updateUserScore() {
+		txtStatistic.setText(getString(R.string.game_statistic_content, user.getScore()));
+	}
 	
+	/**
+	 * Hard code method - only for demo
+	 */
 	private void constructDemoObjects(){
 		user = new PrimaryCharacter("Player", "Demo player");
 
