@@ -10,7 +10,7 @@ import vn.cybersoft.simplegame.model.PrimaryCharacter;
 import vn.cybersoft.simplegame.model.Product;
 import vn.cybersoft.simplegame.model.Rule;
 import vn.cybersoft.simplegame.model.Tool;
-import vn.cybersoft.simplegame.model.gen.AutogenRule1;
+import vn.cybersoft.simplegame.model.auto.AutogenRule1;
 import vn.cybersoft.simplegame.view.FButton;
 import vn.cybersoft.simplegame.view.HorizontalListView;
 import android.app.Activity;
