@@ -10,9 +10,10 @@ import java.util.List;
 public class PrimaryCharacter extends GameObject {
 	private long score = 0;
 	private List<Tool> inventory = new ArrayList<Tool>();
+	private List<Action> listAction = new ArrayList<Action>();
 	
-	public PrimaryCharacter(String name, String description) {
-		super(name, description);
+	public PrimaryCharacter(String id, String name, String description) {
+		super(id, name, description);
 	}
 
 	public long getScore() {
@@ -29,6 +30,14 @@ public class PrimaryCharacter extends GameObject {
 
 	public void setInventory(List<Tool> inventory) {
 		this.inventory = inventory;
+	}
+
+	public List<Action> getListAction() {
+		return listAction;
+	}
+
+	public void setListAction(List<Action> listAction) {
+		this.listAction = listAction;
 	}
 
 	@Override

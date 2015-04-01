@@ -3,7 +3,7 @@ package vn.cybersoft.simplegame.controller;
 import java.util.List;
 
 import vn.cybersoft.demo.simplegame.R;
-import vn.cybersoft.simplegame.model.SecondaryCharacter;
+import vn.cybersoft.simplegame.model.Product;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,8 +15,8 @@ import android.widget.ImageView;
  * @author VietDung<vietdung.cybersoft@gmail.com>
  *
  */
-public class SecondaryCharAdapter extends ArrayAdapter<SecondaryCharacter> {
-	private List<SecondaryCharacter> characters;
+public class SecondaryCharAdapter extends ArrayAdapter<Product> {
+	private List<Product> characters;
 	
 	/**
 	 * @param context
@@ -24,7 +24,7 @@ public class SecondaryCharAdapter extends ArrayAdapter<SecondaryCharacter> {
 	 * @param objects
 	 */
 	public SecondaryCharAdapter(Context context, int resource,
-			List<SecondaryCharacter> characters) {
+			List<Product> characters) {
 		super(context, resource, characters);
 		this.characters = characters;
 	}
@@ -36,7 +36,7 @@ public class SecondaryCharAdapter extends ArrayAdapter<SecondaryCharacter> {
 		convertView = inflater.inflate(R.layout.secondary_char_item,
 				parent, false);
 		
-		SecondaryCharacter item = getItem(position);
+		Product item = getItem(position);
 		ImageView itemview = (ImageView) convertView.findViewById(R.id.char_image);
 		if (item.getImage()!=null) {
 			itemview.setImageBitmap(item.getImage());
@@ -45,7 +45,7 @@ public class SecondaryCharAdapter extends ArrayAdapter<SecondaryCharacter> {
 		return convertView;
 	}
 	
-	public void replaceItem(int position, SecondaryCharacter newItem) {
+	public void replaceItem(int position, Product newItem) {
 		characters.set(position, newItem);
 		notifyDataSetChanged();
 	}

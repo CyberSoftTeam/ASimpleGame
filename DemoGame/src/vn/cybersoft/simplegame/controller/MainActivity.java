@@ -5,10 +5,12 @@ import java.util.List;
 
 import vn.cybersoft.demo.simplegame.R;
 import vn.cybersoft.simplegame.Preferences;
+import vn.cybersoft.simplegame.demo.IDGenerator;
 import vn.cybersoft.simplegame.model.PrimaryCharacter;
-import vn.cybersoft.simplegame.model.RuleExecutor;
-import vn.cybersoft.simplegame.model.SecondaryCharacter;
+import vn.cybersoft.simplegame.model.Product;
+import vn.cybersoft.simplegame.model.Rule;
 import vn.cybersoft.simplegame.model.Tool;
+import vn.cybersoft.simplegame.model.gen.AutogenRule1;
 import vn.cybersoft.simplegame.view.FButton;
 import vn.cybersoft.simplegame.view.HorizontalListView;
 import android.app.Activity;
@@ -36,8 +38,9 @@ public class MainActivity extends Activity
 implements OnClickListener {
 	private static final String TAG = MainActivity.class.getSimpleName();
 	private PrimaryCharacter user;
-	private List<SecondaryCharacter> characters = new ArrayList<SecondaryCharacter>();
+	private List<Product> characters = new ArrayList<Product>();
 	private List<Tool> tools = new ArrayList<Tool>();
+	private GameScript gscript;
 
 	private SecondaryCharAdapter charAdapter;
 	private ToolAdapter toolAdapter;
@@ -65,21 +68,23 @@ implements OnClickListener {
 			if (charAdapter==null) {
 				return;
 			}
-			SecondaryCharacter item = charAdapter.getItem(position);
+			Product item = charAdapter.getItem(position);
 			Log.d(TAG, "You are choosing "+item.getName()+"-"+item.getDescription());
-			
-			Tool tool = toolAdapter.getCurrentTool();
-			SecondaryCharacter newItem = RuleExecutor.doRule(tool,
-					item, position, user);
-			if (newItem!=null) {
-				charAdapter.replaceItem(position, newItem);
-				updateUserScore();
-			}
-			
-		}
 
+			Tool tool = toolAdapter.getCurrentTool();
+			for (Rule rule : gscript.getListRule()) {
+				if (rule instanceof AutogenRule1) {
+					AutogenRule1 rule1 = (AutogenRule1) rule;
+					Product newItem = rule1.doRule(tool, item, user);
+					if (newItem!=null) {
+						charAdapter.replaceItem(position, newItem);
+						updateUserScore();
+					}
+				}
+			}
+		}
 	};
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -89,9 +94,9 @@ implements OnClickListener {
 		txtToolDesc  = (TextView) findViewById(R.id.txt_tool_desc);
 		txtStatistic = (TextView) findViewById(R.id.txt_statistic);
 		btnStopGame = (FButton) findViewById(R.id.btn_stop_game);
-		
+
 		btnStopGame.setOnClickListener(this);
-		
+
 		new AsyncTask<Void, Void, Void>() {
 			ProgressDialog progressDialog;
 			protected void onPreExecute() {
@@ -122,11 +127,7 @@ implements OnClickListener {
 
 	public static void showActivity(Context context) {
 		Intent i = new Intent(context, MainActivity.class);
-		if (Build.VERSION.SDK_INT >= 11) {
-			i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-        } else {
-        	i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        }
+		i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
 		context.startActivity(i);
 	}
 
@@ -139,17 +140,17 @@ implements OnClickListener {
 	private void updateUserScore() {
 		txtStatistic.setText(getString(R.string.game_statistic_content, user.getScore()));
 	}
-	
+
 	/**
 	 * Hard code method - only for demo
 	 */
 	private void constructDemoObjects(){
-		user = new PrimaryCharacter("Player", "Demo player");
-
+		user = new PrimaryCharacter(IDGenerator.getNextId(), "Player", "Demo player");
+		
 		// prepare tools
-		Tool scissor = new Tool("Scissor", "Scissor help you harvest flower", 5);
-		Tool watering = new Tool("Watering-Can", "Watering-Can help sprout grow up to flower", 5);
-		Tool shovel = new Tool("Shovel", "Shovel help seed grow up to sprout", 5);
+		Tool scissor = new Tool(IDGenerator.getNextId(), "Scissor", "Scissor help you harvest flower", 5);
+		Tool watering = new Tool(IDGenerator.getNextId(), "Watering-Can", "Watering-Can help sprout grow up to flower", 5);
+		Tool shovel = new Tool(IDGenerator.getNextId(), "Shovel", "Shovel help seed grow up to sprout", 5);
 		scissor.setImage(BitmapFactory.decodeFile(Preferences.IMAGE_DIR_PATH+"/scissor.png"));
 		watering.setImage(BitmapFactory.decodeFile(Preferences.IMAGE_DIR_PATH+"/watering.png"));
 		shovel.setImage(BitmapFactory.decodeFile(Preferences.IMAGE_DIR_PATH+"/shovel.png"));
@@ -160,12 +161,17 @@ implements OnClickListener {
 		// prepare secondary character
 		Bitmap seedImg = BitmapFactory.decodeFile(Preferences.IMAGE_DIR_PATH+"/seed.png");
 		for (int i = 0; i < 9; i++) {
-			SecondaryCharacter seed = new SecondaryCharacter("Seed "+i, "Seed");
+			String newid = IDGenerator.getNextId();
+			Product seed = new Product(newid, "Seed "+newid, "Seed");
 			seed.setImage(seedImg);
 			characters.add(seed);
 		}
 		Log.d(TAG, String.format("Character: %d, Tool: %d\n", characters.size(), tools.size()));
-
+		
+		// load rules
+		gscript = new GameScript(IDGenerator.getNextId());
+		gscript.getListRule().add(new AutogenRule1(IDGenerator.getNextId()));
+		
 	}
 
 	@Override
